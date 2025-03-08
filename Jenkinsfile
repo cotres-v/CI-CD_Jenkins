@@ -1,7 +1,7 @@
 Jenkinsfile (Declarative Pipeline)
 pipeline {
     agent {
-        label 'my-agent'
+        label 'main'
     }
     stages {
         stage('Build') {
