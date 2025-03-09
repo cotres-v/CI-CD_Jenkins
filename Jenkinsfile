@@ -31,15 +31,17 @@ pipeline {
         }
         stage('Clang_Format') {
             steps {
-                script {
-                    def errors = sh(script: 'clang-format --dry-run --style=Google --Werror cat/*.c grep/*.c', returnStatus: true)
-
-                    if (errors != 0) {
-                        echo "Code style errors found!"
-                        sh 'clang-format --dry-run --style=Google --Werror cat/*.c grep/*.c'
-                        error("Code style check failed") 
-                    } else {
-                        echo "Code style is OK."
+                echo 'step Clang Format Check'
+                dir ('src/') {
+                    script {
+                        def errors = sh(script: 'clang-format --dry-run --style=Google --Werror cat/*.c grep/*.c', returnStatus: true)
+                        if (errors != 0) {
+                            echo "Code style errors found!"
+                            sh 'clang-format --dry-run --style=Google --Werror cat/*.c grep/*.c'
+                            error("Code style check failed") 
+                        } else {
+                            echo "Code style is OK."
+                        }
                     }
                 }
             }
