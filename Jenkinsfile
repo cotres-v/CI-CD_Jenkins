@@ -15,8 +15,9 @@ pipeline {
                 echo 'Building Cat'
                 dir('src/cat') {
                     sh 'make s21_cat'
+                    sh 'ls -l' // Показать содержимое рабочей директории
                 }
-                archiveArtifacts artifacts: 's21_cat', fingerprint: true
+                archiveArtifacts artifacts: 'src/cat/s21_cat', fingerprint: true
             }
         }
         stage('Build_Grep') {
