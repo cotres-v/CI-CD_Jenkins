@@ -13,18 +13,18 @@ pipeline {
         stage('Build_Cat') {
             steps {
                 echo 'Building Cat'
-                sh 'ls'
-                sh 'cd src/cat'
-                sh 'ls'
-                sh 'make s21_cat'
+                dir('src/cat') {
+                    sh 'make s21_cat'
+                }
                 archiveArtifacts artifacts: 'src/cat/s21_cat', fingerprint: true
             }
         }
         stage('Build_Grep') {
             steps {
                 echo 'Building Grep'
-                sh 'cd src/grep'
-                sh 'make s21_grep'
+                dir ('src/grep') {
+                    sh 'make s21_grep'
+                }
                 archiveArtifacts artifacts: 'src/cat/s21_grep', fingerprint: true
             }
         }
