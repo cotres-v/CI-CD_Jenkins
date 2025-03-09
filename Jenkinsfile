@@ -62,5 +62,13 @@ pipeline {
                 }
             }
         }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying Cat and Grep'
+                dir('src') {
+                    sh 'bash deploy.sh'
+                }
+            }
+        }
     }
 }
