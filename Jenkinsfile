@@ -5,6 +5,11 @@ pipeline {
         timestamps()
     }
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
         stage('Build_Cat') {
             steps {
                 echo 'Building Cat'
