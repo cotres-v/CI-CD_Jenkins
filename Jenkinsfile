@@ -65,7 +65,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying Cat and Grep'
-                dir('src') {
+                dir('src/') {
                     sh 'bash deploy.sh'
                 }
             }
