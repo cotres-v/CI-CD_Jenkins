@@ -7,12 +7,13 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                echo 'step Git Checkout'
                 checkout scm
             }
         }
         stage('Build_Cat') {
             steps {
-                echo 'Building Cat'
+                echo 'step Building Cat'
                 dir('src/cat') {
                     sh 'make s21_cat'
                 }
@@ -21,11 +22,19 @@ pipeline {
         }
         stage('Build_Grep') {
             steps {
-                echo 'Building Grep'
+                echo 'step Building Grep'
                 dir ('src/grep') {
                     sh 'make s21_grep'
                 }
                 archiveArtifacts artifacts: 'src/grep/s21_grep', fingerprint: true
+            }
+        }
+        stage('Clang_Format') {
+            steps {
+                echo 'step Clang Format'
+                dir ('src/') {
+                    sh 'clang-format --Werror -n --style=Google cat/*.c grep/*.c'
+                }
             }
         }
     }
