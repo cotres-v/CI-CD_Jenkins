@@ -25,7 +25,7 @@ pipeline {
                 dir ('src/grep') {
                     sh 'make s21_grep'
                 }
-                archiveArtifacts artifacts: 'src/cat/s21_grep', fingerprint: true
+                archiveArtifacts artifacts: 'src/grep/s21_grep', fingerprint: true
             }
         }
     }
