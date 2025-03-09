@@ -64,9 +64,23 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying Cat and Grep'
-                dir('src/') {
-                    sh 'bash deploy.sh'
+                script {
+                    def s21CatPath ="${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/lastBuild/archive/src/cat/s21_cat"
+                    def s21GrepPath ="${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/lastBuild/archive/src/grep/s21_grep"
+
+                    def remoteUser ="viktor"
+                    def remoteHost ="192.168.1.74"
+                    def remoteDir ="/usr/local/bin"
+
+                    echo "Copying $s21CatPath and $s21GrepPath to $remoteUser@$remoteHost:$remoteDir ..."
+                    def scpCommand = "scp $s21CatPath $s21GrepPath $remoteUser@$remoteHost:$remoteDir"
+                    def scpResult = sh(script: scpCommand, returnStatus: true)
+
+                    if (scpResult == 0) {
+                        echo "The artifacts were successfully copied to $remoteHost."
+                    } else {
+                        error "Error when copying artifacts."
+                    }
                 }
             }
         }
