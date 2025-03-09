@@ -65,8 +65,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    def s21CatPath ="${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/lastBuild/archive/src/cat/s21_cat"
-                    def s21GrepPath ="${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/lastBuild/archive/src/grep/s21_grep"
+                    def s21CatPath ="${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/${env.BUILD_NUMBER}/archive/src/cat/s21_cat"
+                    def s21GrepPath ="${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/${env.BUILD_NUMBER}/archive/src/grep/s21_grep"
 
                     def remoteUser ="viktor"
                     def remoteHost ="192.168.1.74"
