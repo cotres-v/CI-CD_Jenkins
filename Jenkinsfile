@@ -13,6 +13,7 @@ pipeline {
         stage('Build_Cat') {
             steps {
                 echo 'Building Cat'
+                sh 'ls'
                 sh 'cd src/cat'
                 sh 'make s21_cat'
                 archiveArtifacts artifacts: 'src/cat/s21_cat', fingerprint: true
