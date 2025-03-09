@@ -46,5 +46,21 @@ pipeline {
                 }
             }
         }
+        stage('Test_Cat') {
+            steps {
+                echo 'step Testing Cat'
+                dir('src/cat') {
+                    sh 'bash test_cat.sh'
+                }
+            }
+        }
+        stage('Test_Grep') {
+            steps {
+                echo 'step Testing Grep'
+                dir('src/grep') {
+                    sh 'bash test_grep.sh'
+                }
+            }
+        }
     }
 }
