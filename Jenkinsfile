@@ -1,4 +1,4 @@
-pipeline {
+pipeline { 
     agent any
     options {
         buildDiscarder(logRotator(artifactDaysToKeepStr: '30'))
